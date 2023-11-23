@@ -6,7 +6,7 @@ const navstyle = 'border-l border-gray-300'
 
 const Header = () => {
   return (
-    <header className=' flex justify-between'>
+    <header className='flex justify-between'>
       <a href='' className='flex gap-1'>
         <LogoIcon />
         <span className='font-bold text-xl'>airlifes</span>
