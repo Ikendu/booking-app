@@ -1,20 +1,27 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Register = () => {
   const [name, setName] = useState(``)
   const [email, setEmail] = useState(``)
   const [password, setPassword] = useState(``)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    if (name === ``) return toast.error(`name cannot be empty`)
 
-    axios.post(`/register`, {
-      name,
-      email,
-      password,
-    })
+    try {
+      await axios.post(`/register`, {
+        name,
+        email,
+        password,
+      })
+      toast.success(`Registration successful, Now you can login`)
+    } catch (error) {
+      toast.error(`Failed, retry with a different email`)
+    }
   }
   return (
     <div className='mt-14 grow items-center justify-round'>
