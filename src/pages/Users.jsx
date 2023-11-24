@@ -18,7 +18,7 @@ const Users = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`/delete/${id}`)
+      await axios.delete(`/users/${id}`)
       getUsers()
       toast.success(`User Deleted`)
     } catch (error) {
@@ -32,7 +32,7 @@ const Users = () => {
         <ul key={user._id}>
           <li className='flex p-4'>
             <p>{user.name}</p>
-            <button className={deleteSyle} onClick={deleteUser}>
+            <button className={deleteSyle} onClick={() => deleteUser(user._id)}>
               Delete
             </button>
             <button>Update</button>
