@@ -3,11 +3,12 @@
 @tailwind utilities;
 
 input[type='email'],
-input[type='password'] {
+input[type='password'],
+input[type='text'] {
   @apply w-full py-2 px-3 border my-1 rounded-2xl;
 }
 
 button.primary {
-  background-color: #f5385d;
-  @apply bg-primary w-full text-white rounded-xl p-2;
+  background-color: #265ef8;
+  @apply bg-sky-700 w-full text-white rounded-xl p-2;
 }
