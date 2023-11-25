@@ -10,10 +10,10 @@ const Header = () => {
   const { user } = useContext(UserContext)
   return (
     <header className='flex justify-between'>
-      <a href='' className='flex gap-1'>
+      <Link to={`/`} className='flex gap-1'>
         <LogoIcon />
         <span className='font-bold text-xl'>airlifes</span>
-      </a>
+      </Link>
       <div className={roundhd}>
         <div>Anywhere</div>
         <div className={navstyle} />
@@ -24,9 +24,9 @@ const Header = () => {
           <FindIcon />
         </button>
       </div>
-      <Link to={`/login`} className={roundhd + 'items-center'}>
+      <Link to={user ? `/account` : `/login`} className={roundhd + 'items-center'}>
         <NavIcon />
-        {user && <p>{user.name}</p>}
+        {user ? <p>{user.name}</p> : `Login`}
         <div className='overflow-hidden bg-gray-500 text-white rounded-full '>
           <UserIcon />
         </div>
