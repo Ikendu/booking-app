@@ -5,20 +5,24 @@ import Layout from './pages/Layout'
 import Register from './pages/Register'
 import axios from 'axios'
 import Users from './pages/Users'
+import UserContexProvider from './pages/userContex'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
+axios.defaults.withCredentials = true
 
 function App() {
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<Layout />}>
-          <Route index element={<IndexPage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/users' element={<Users />} />
-        </Route>
-      </Routes>
+      <UserContexProvider>
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route index element={<IndexPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/users' element={<Users />} />
+          </Route>
+        </Routes>
+      </UserContexProvider>
     </div>
   )
 }

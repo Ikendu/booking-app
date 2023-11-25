@@ -1,23 +1,30 @@
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import Register from './Register'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { UserContext } from './userContex'
 
 const LoginPage = () => {
   const [email, setEmail] = useState(``)
   const [password, setPassword] = useState(``)
+  const [redirect, setRedirect] = useState(false)
+  const { user, setUser } = useContext(UserContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      await axios.post(`/login`, { email, password })
+      const userDoc = await axios.post(`/login`, { email, password })
       toast.success(`Login successful`)
+      setUser(userDoc.data)
+      setRedirect(true)
     } catch (error) {
       toast.error(error.message)
     }
   }
+
+  if (redirect) return <Navigate to={`/`} />
 
   return (
     <div className='mt-14 grow items-center justify-round'>

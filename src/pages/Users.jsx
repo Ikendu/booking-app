@@ -32,6 +32,7 @@ const Users = () => {
         <ul key={user._id}>
           <li className='flex p-4'>
             <p>{user.name}</p>
+            <p className='pl-10'>{user.email}</p>
             <button className={deleteSyle} onClick={() => deleteUser(user._id)}>
               Delete
             </button>
