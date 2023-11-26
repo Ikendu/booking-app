@@ -38,7 +38,9 @@ const Account = () => {
   const linkClasses = (type) => {
     let classes = `inline-flex gap-2 px-6 py-2 rounded-full  `
     if (type === subpage) {
-      classes = `${classes} px-6 py-2 bg-primary text-white`
+      classes = `${classes}  bg-primary text-white`
+    } else {
+      classes = `${classes} bg-gray-200 `
     }
     return classes
   }
