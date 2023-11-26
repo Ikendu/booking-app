@@ -1,5 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import { PlusIcon } from '../assets/icons/Logo'
+import {
+  EnterIcon,
+  PetIcon,
+  PlusIcon,
+  RadioIcon,
+  TVicon,
+  TruckIcon,
+  WifiIcon,
+} from '../assets/icons/Logo'
 
 const Places = () => {
   const { action } = useParams()
@@ -45,25 +53,35 @@ const Places = () => {
 
             <h2 className=' text-2xl font-medium mt-4'>Perks</h2>
             <p className=' text-gray-500 text-sm'>Select all the perks of your place</p>
-            <div>
-              <label>
+            <div className='grid mt-2 gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
                 <input type='checkbox' />
+                <WifiIcon />
                 <span>Wifi</span>
               </label>
-              <label>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
                 <input type='checkbox' />
+                <TruckIcon />
                 <span>Free packing spot</span>
               </label>
-              <label>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
                 <input type='checkbox' />
+                <PetIcon />
                 <span>Pets Allowd</span>
               </label>
-              <label>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
                 <input type='checkbox' />
+                <TVicon />
                 <span>TV</span>
               </label>
-              <label>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
                 <input type='checkbox' />
+                <RadioIcon />
+                <span>Radio</span>
+              </label>
+              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
+                <input type='checkbox' />
+                <EnterIcon />
                 <span>Private Entrance</span>
               </label>
             </div>
