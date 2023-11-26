@@ -10,5 +10,5 @@ input[type='text'] {
 
 button.primary {
   background-color: #265ef8;
-  @apply bg-sky-700 w-full text-white rounded-xl p-2;
+  @apply bg-sky-600 w-full text-white rounded-xl p-2;
 }
