@@ -47,7 +47,7 @@ const Account = () => {
 
   return (
     <div>
-      <h1>Welcome {user?.name.toUpperCase()} </h1>
+      <h1 className='text-center m-6'>Welcome {user?.name.toUpperCase()} </h1>
       <div className='mt-10 w-full flex gap-4 justify-center '>
         <Link to={`/account/profile`} className={linkClasses(`profile`)}>
           <UserIcon />

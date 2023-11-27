@@ -45,7 +45,9 @@ const Places = () => {
             </div>
 
             <div className='mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
-              <button className='border bg-transparent p-8 text-2xl text-gray-600'>+ </button>
+              <button className='border bg-transparent p-8 text-2xl text-gray-600 rounded-md'>
+                +{' '}
+              </button>
             </div>
 
             <h2 className=' text-2xl font-medium mt-4'>Description</h2>
@@ -84,6 +86,33 @@ const Places = () => {
                 <EnterIcon />
                 <span>Private Entrance</span>
               </label>
+            </div>
+
+            <h2 className=' text-2xl font-medium mt-4'>Extra Info</h2>
+            <p className=' text-gray-500 text-sm'>House rules, etc</p>
+            <textarea />
+
+            <h2 className=' text-2xl font-medium mt-4'>Check in-out times</h2>
+            <p className=' text-gray-500 text-sm'>
+              Add check in and out time, Remember to add some time windows for cleaning the rooms
+              between guest.
+            </p>
+            <div className='grid sm:grid-cols-3 gap-3 text-center'>
+              <div>
+                <h3 className='mt-2 mb-1'>Check in time</h3>
+                <input type='text' placeholder='12:00' />
+              </div>
+              <div>
+                <h3 className='mt-2 mb-1'>Check out time</h3>
+                <input type='text' />
+              </div>
+              <div>
+                <h3 className='mt-2 mb-1'>Max number of guest</h3>
+                <input type='text' />
+              </div>
+            </div>
+            <div>
+              <button className='primary my-5 '>Save</button>
             </div>
           </form>
         </div>
