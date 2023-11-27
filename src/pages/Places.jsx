@@ -3,6 +3,7 @@ import { PlusIcon } from '../assets/icons/Logo'
 import { useState } from 'react'
 import Perks from './components/Perks'
 import Checktime from './components/Checktime'
+import axios from 'axios'
 
 const Places = () => {
   const [title, setTitle] = useState(``)
@@ -27,6 +28,19 @@ const Places = () => {
       {inputDescription(desc)}
     </>
   )
+
+  const photoByLInk = async (e) => {
+    e.preventDefault()
+
+    const { data: filename } = await axios.post(`/upload-link`, { link: photoLinks })
+    setAddPhotos((prev) => [...prev, filename])
+    setPhotoLinks(``)
+  }
+
+  const uploadFiles = (e) => {
+    const files = e.target.files
+    console.log(files)
+  }
 
   return (
     <div>
@@ -69,29 +83,47 @@ const Places = () => {
                 onChange={(e) => setPhotoLinks(e.target.value)}
                 placeholder='Add using a link ...jpg'
               />
-              <button className=' bg-gray-400 text-white px-4 rounded-xl'>Add&nbsp;Photo</button>
-            </div>
-            <div className='mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
-              <button className='border bg-transparent p-8 text-2xl text-gray-600 rounded-md'>
-                +{' '}
+              <button onClick={photoByLInk} className=' bg-gray-400 text-white px-4 rounded-xl'>
+                Add&nbsp;Photo
               </button>
             </div>
 
+            <div className='mt-2 gap-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
+              {addPhotos.length > 0 &&
+                addPhotos
+                  .map((photo) => (
+                    <div key={photo}>
+                      <img className='rounded-xl' src={'http://localhost:4000/uploads/' + photo} />
+                    </div>
+                  ))
+                  .reverse()}
+              <label className='border bg-transparent cursor-pointer p-8 text-2xl text-gray-600 rounded-xl text-center'>
+                <input type='file' className='hidden' onChange={uploadFiles} />+
+              </label>
+            </div>
+
             {preInput(`Description`, `description of the place`)}
-            <textarea />
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
 
             {preInput(`Perks`, `Select all the perks of your place`)}
             <Perks selected={perks} onChange={setPerks} />
 
             {preInput(`Extra Info`, `House rules, etc`)}
-            <textarea />
+            <textarea value={extraInfo} onChange={(e) => setExtrainfo(e.target.value)} />
 
             {preInput(
               `Check in-out times`,
               `Add check in and out time, Remember to add some time windows for cleaning the rooms
               between guest.`
             )}
-            <Checktime />
+            <Checktime
+              checkIn={checkIn}
+              setCheckIn={setCheckIn}
+              checkOut={checkOut}
+              setCheckout={setCheckout}
+              maxGuests={maxGuests}
+              setMaxGuests={setMaxGuests}
+            />
           </form>
         </div>
       )}
