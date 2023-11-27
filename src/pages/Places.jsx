@@ -1,16 +1,32 @@
 import { Link, useParams } from 'react-router-dom'
-import {
-  EnterIcon,
-  PetIcon,
-  PlusIcon,
-  RadioIcon,
-  TVicon,
-  TruckIcon,
-  WifiIcon,
-} from '../assets/icons/Logo'
+import { PlusIcon } from '../assets/icons/Logo'
+import { useState } from 'react'
+import Perks from './components/Perks'
+import Checktime from './components/Checktime'
 
 const Places = () => {
+  const [title, setTitle] = useState(``)
+  const [address, setAddress] = useState(``)
+  const [addPhotos, setAddPhotos] = useState([])
+  const [photoLinks, setPhotoLinks] = useState(``)
+  const [description, setDescription] = useState(``)
+  const [perks, setPerks] = useState([])
+  const [extraInfo, setExtrainfo] = useState(``)
+  const [checkIn, setCheckIn] = useState(``)
+  const [checkOut, setCheckout] = useState(``)
+  const [maxGuests, setMaxGuests] = useState(1)
+
   const { action } = useParams()
+
+  const inputHeader = (title) => <h2 className=' text-2xl font-medium mt-4'>{title}</h2>
+  const inputDescription = (desc) => <p className=' text-gray-500 text-sm'>{desc}</p>
+
+  const preInput = (title, desc) => (
+    <>
+      {inputHeader(title)}
+      {inputDescription(desc)}
+    </>
+  )
 
   return (
     <div>
@@ -27,93 +43,55 @@ const Places = () => {
       {action == `new` && (
         <div>
           <form>
-            <h2 className=' text-2xl font-medium mt-4'>Title</h2>
-            <p className=' text-gray-500 text-sm'>
-              Title for your place should be catchy as in advertisement
-            </p>
-            <input type='text' placeholder='title for example my lovely appartment' />
+            {inputHeader(`Title`)}
+            {inputDescription(`Title for your place should be catchy as in advertisement`)}
+            <input
+              type='text'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              placeholder='title for example my lovely appartment'
+            />
 
-            <h2 className=' text-2xl font-medium mt-4'>Address</h2>
-            <p className=' text-gray-500 text-sm'>Address to the place</p>
-            <input type='text' placeholder='title for example my lovely appartment' />
+            {inputHeader(`Address`)}
+            {inputDescription(`Address to the place`)}
+            <input
+              type='text'
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder='title for example my lovely appartment'
+            />
 
-            <h2 className=' text-2xl font-medium mt-4'>Photos</h2>
-            <p className=' text-gray-500 text-sm'>Click the + sign to upload (More = better)</p>
+            {preInput(`Photos`, `Click the + sign to upload (More = better)`)}
             <div className='flex gap-2'>
-              <input type='text' placeholder='Add using a link ...jpg' />
+              <input
+                type='text'
+                value={photoLinks}
+                onChange={(e) => setPhotoLinks(e.target.value)}
+                placeholder='Add using a link ...jpg'
+              />
               <button className=' bg-gray-400 text-white px-4 rounded-xl'>Add&nbsp;Photo</button>
             </div>
-
             <div className='mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6'>
               <button className='border bg-transparent p-8 text-2xl text-gray-600 rounded-md'>
                 +{' '}
               </button>
             </div>
 
-            <h2 className=' text-2xl font-medium mt-4'>Description</h2>
-            <p className=' text-gray-500 text-sm'>description of the place</p>
-
-            <h2 className=' text-2xl font-medium mt-4'>Perks</h2>
-            <p className=' text-gray-500 text-sm'>Select all the perks of your place</p>
-            <div className='grid mt-2 gap-2 grid-cols-2 md:grid-cols-4 lg:grid-cols-6'>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <WifiIcon />
-                <span>Wifi</span>
-              </label>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <TruckIcon />
-                <span>Free packing spot</span>
-              </label>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <PetIcon />
-                <span>Pets Allowd</span>
-              </label>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <TVicon />
-                <span>TV</span>
-              </label>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <RadioIcon />
-                <span>Radio</span>
-              </label>
-              <label className='border p-4 flex gap-2 items-center rounded-2xl cursor-pointer'>
-                <input type='checkbox' />
-                <EnterIcon />
-                <span>Private Entrance</span>
-              </label>
-            </div>
-
-            <h2 className=' text-2xl font-medium mt-4'>Extra Info</h2>
-            <p className=' text-gray-500 text-sm'>House rules, etc</p>
+            {preInput(`Description`, `description of the place`)}
             <textarea />
 
-            <h2 className=' text-2xl font-medium mt-4'>Check in-out times</h2>
-            <p className=' text-gray-500 text-sm'>
-              Add check in and out time, Remember to add some time windows for cleaning the rooms
-              between guest.
-            </p>
-            <div className='grid sm:grid-cols-3 gap-3 text-center'>
-              <div>
-                <h3 className='mt-2 mb-1'>Check in time</h3>
-                <input type='text' placeholder='12:00' />
-              </div>
-              <div>
-                <h3 className='mt-2 mb-1'>Check out time</h3>
-                <input type='text' />
-              </div>
-              <div>
-                <h3 className='mt-2 mb-1'>Max number of guest</h3>
-                <input type='text' />
-              </div>
-            </div>
-            <div>
-              <button className='primary my-5 '>Save</button>
-            </div>
+            {preInput(`Perks`, `Select all the perks of your place`)}
+            <Perks selected={perks} onChange={setPerks} />
+
+            {preInput(`Extra Info`, `House rules, etc`)}
+            <textarea />
+
+            {preInput(
+              `Check in-out times`,
+              `Add check in and out time, Remember to add some time windows for cleaning the rooms
+              between guest.`
+            )}
+            <Checktime />
           </form>
         </div>
       )}
