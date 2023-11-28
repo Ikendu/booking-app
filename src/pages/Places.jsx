@@ -37,15 +37,20 @@ const Places = () => {
     setPhotoLinks(``)
   }
 
-  const uploadFiles = (e) => {
+  const uploadPhotos = async (e) => {
     const files = e.target.files
-    console.log(files)
+    const data = new FormData()
+    data.set(`photos`, files)
+    const response = await axios.post(`/uploads`, data, {
+      headers: { 'Content-type': 'multipart/form-data' },
+    })
+    setAddPhotos((prev) => [...prev, response.data])
   }
 
   return (
     <div>
       {action !== `new` && (
-        <div className=' text-center'>
+        <div className='text-center'>
           <Link
             to={`/account/places/new`}
             className='inline-flex gap-1 bg-primary m-8 py-2 px-4 rounded-full text-white'
@@ -98,7 +103,7 @@ const Places = () => {
                   ))
                   .reverse()}
               <label className='border bg-transparent cursor-pointer p-8 text-2xl text-gray-600 rounded-xl text-center'>
-                <input type='file' className='hidden' onChange={uploadFiles} />+
+                <input type='file' className='hidden' onChange={uploadPhotos} />+
               </label>
             </div>
 
