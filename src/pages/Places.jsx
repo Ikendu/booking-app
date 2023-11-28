@@ -40,11 +40,12 @@ const Places = () => {
   const uploadPhotos = async (e) => {
     const files = e.target.files
     const data = new FormData()
-    data.set(`photos`, files)
+    for (let i in files) data.append(`photos`, files[i]) //for-loop for multiple upload
     const response = await axios.post(`/uploads`, data, {
       headers: { 'Content-type': 'multipart/form-data' },
     })
-    setAddPhotos((prev) => [...prev, response.data])
+    //const { data: filenames } = response
+    setAddPhotos((prev) => [...prev, ...response.data])
   }
 
   return (
@@ -97,13 +98,16 @@ const Places = () => {
               {addPhotos.length > 0 &&
                 addPhotos
                   .map((photo) => (
-                    <div key={photo}>
-                      <img className='rounded-xl' src={'http://localhost:4000/uploads/' + photo} />
+                    <div key={photo} className='flex h-32'>
+                      <img
+                        className='rounded-xl w-full object-cover'
+                        src={'http://localhost:4000/uploads/' + photo}
+                      />
                     </div>
                   ))
                   .reverse()}
               <label className='border bg-transparent cursor-pointer p-8 text-2xl text-gray-600 rounded-xl text-center'>
-                <input type='file' className='hidden' onChange={uploadPhotos} />+
+                <input type='file' multiple className='hidden' onChange={uploadPhotos} />+
               </label>
             </div>
 
@@ -111,7 +115,7 @@ const Places = () => {
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
 
             {preInput(`Perks`, `Select all the perks of your place`)}
-            <Perks selected={perks} onChange={setPerks} />
+            <Perks perks={perks} setPerks={setPerks} />
 
             {preInput(`Extra Info`, `House rules, etc`)}
             <textarea value={extraInfo} onChange={(e) => setExtrainfo(e.target.value)} />
@@ -135,4 +139,5 @@ const Places = () => {
     </div>
   )
 }
+
 export default Places
