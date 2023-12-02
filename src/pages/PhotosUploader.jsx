@@ -1,8 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 
-const PhotosUploader = () => {
-  const [addPhotos, setAddPhotos] = useState([])
+const PhotosUploader = ({ addPhotos, setAddPhotos }) => {
   const [photoLinks, setPhotoLinks] = useState(``)
 
   const photoByLInk = async (e) => {

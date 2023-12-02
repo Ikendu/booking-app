@@ -9,7 +9,7 @@ import PhotosUploader from './PhotosUploader'
 const Places = () => {
   const [title, setTitle] = useState(``)
   const [address, setAddress] = useState(``)
-
+  const [addPhotos, setAddPhotos] = useState([])
   const [description, setDescription] = useState(``)
   const [perks, setPerks] = useState([])
   const [extraInfo, setExtrainfo] = useState(``)
@@ -29,6 +29,24 @@ const Places = () => {
     </>
   )
 
+  const handlePlaces = async (e) => {
+    e.preventDefault()
+
+    const placeData = {
+      title,
+      address,
+      addPhotos,
+      description,
+      perks,
+      extraInfo,
+      checkIn,
+      checkOut,
+      maxGuests,
+    }
+
+    const { data } = await axios.post(`/places`, placeData)
+  }
+
   return (
     <div>
       {action !== `new` && (
@@ -43,7 +61,7 @@ const Places = () => {
       )}
       {action == `new` && (
         <div>
-          <form>
+          <form onSubmit={handlePlaces}>
             {inputHeader(`Title`)}
             {inputDescription(`Title for your place should be catchy as in advertisement`)}
             <input
@@ -63,7 +81,7 @@ const Places = () => {
             />
 
             {preInput(`Photos`, `Click the + sign to upload (More = better)`)}
-            <PhotosUploader />
+            <PhotosUploader addPhotos={addPhotos} setAddPhotos={setAddPhotos} />
 
             {preInput(`Description`, `description of the place`)}
             <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
