@@ -27,9 +27,6 @@ const Checktime = ({ checkIn, setCheckIn, checkOut, setCheckout, maxGuests, setM
           <input type='number' value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} />
         </div>
       </div>
-      <div>
-        <button className='primary my-5 '>Save</button>
-      </div>
     </>
   )
 }
