@@ -16,9 +16,13 @@ const LoginPage = () => {
 
     try {
       const userDoc = await axios.post(`/login`, { email, password })
-      toast.success(`Login successful`)
-      setUser(userDoc.data)
-      setRedirect(true)
+      if (userDoc.data.email) {
+        toast.success(`Login successful`)
+        setUser(userDoc.data)
+        setRedirect(true)
+      } else {
+        toast.error(`Login details not correct`)
+      }
     } catch (error) {
       toast.error(error.message)
     }

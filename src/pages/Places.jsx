@@ -1,13 +1,30 @@
 import { Link, useParams } from 'react-router-dom'
 import { PlusIcon } from '../assets/icons/Logo'
-
 import PlacesFormPage from './components/PlacesFormPage'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 const Places = () => {
   const { action } = useParams()
+  const [allPlaces, setAllPlaces] = useState([])
+
+  const getAllPost = async () => {
+    const allpost = await axios.get(`/postlist`)
+    setAllPlaces(allpost.data)
+  }
+  useEffect(() => {
+    getAllPost()
+  }, [])
 
   return (
     <div>
+      <div className='text-center'>
+        All places
+        {allPlaces.map((place) => (
+          <div key={place._id}>{place?.title}</div>
+        ))}
+      </div>
+
       {action !== `new` && (
         <div className='text-center'>
           <Link
