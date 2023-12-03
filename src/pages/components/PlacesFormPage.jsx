@@ -62,7 +62,8 @@ const PlacesFormPage = ({ getAllPost }) => {
       maxGuests,
     }
 
-    await axios.post(`/places`, placeData)
+    if (id) await axios.put(`/places`, { id, ...placeData })
+    else await axios.post(`/places`, placeData)
 
     setRedirect(`/account/places`)
     getAllPost()
