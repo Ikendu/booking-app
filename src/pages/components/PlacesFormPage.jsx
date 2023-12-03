@@ -8,7 +8,7 @@ import AccountNav from './AccountNav'
 
 const PlacesFormPage = ({ getAllPost }) => {
   const { id } = useParams()
-  console.log(id)
+
   const [title, setTitle] = useState(``)
   const [address, setAddress] = useState(``)
   const [addPhotos, setAddPhotos] = useState([])
@@ -22,7 +22,19 @@ const PlacesFormPage = ({ getAllPost }) => {
 
   useEffect(() => {
     if (!id) return
-    axios.get(`/places/` + id)
+    axios.get(`/places/` + id).then((userDoc) => {
+      const { data } = userDoc
+      console.log(data.title)
+      setTitle(data.title)
+      setAddress(data.address)
+      //setAddPhotos(data.addPhotos)
+      setDescription(data.description)
+      setPerks(data.perks)
+      setExtrainfo(data.extraInfo)
+      setCheckIn(data.checkIn)
+      setCheckout(data.checkOut)
+      setMaxGuests(data.maxGuests)
+    })
   }, [id])
 
   const inputHeader = (title) => <h2 className=' text-2xl font-medium mt-4'>{title}</h2>
@@ -89,7 +101,7 @@ const PlacesFormPage = ({ getAllPost }) => {
         <Perks perks={perks} setPerks={setPerks} />
 
         {preInput(`Extra Info`, `House rules, etc`)}
-        <textarea value={extraInfo} onChange={(e) => setExtrainfo(e.target.value)} />
+        <textarea className='' value={extraInfo} onChange={(e) => setExtrainfo(e.target.value)} />
 
         {preInput(
           `Check in-out times`,
