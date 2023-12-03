@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { UserContext } from './userContex'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import Places from './Places'
 import AccountNav from './components/AccountNav'

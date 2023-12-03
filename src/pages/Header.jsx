@@ -24,7 +24,7 @@ const Header = () => {
           <FindIcon />
         </button>
       </div>
-      <Link to={user ? `/account/profile` : `/login`} className={roundhd + 'items-center'}>
+      <Link to={user ? `/account` : `/login`} className={roundhd + 'items-center'}>
         <NavIcon />
         {user ? <p>{user.name}</p> : `Login`}
         <div className='overflow-hidden bg-gray-500 text-white rounded-full '>

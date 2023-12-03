@@ -8,7 +8,7 @@ const Places = () => {
   const [allPlaces, setAllPlaces] = useState([])
 
   const getAllPost = async () => {
-    const allpost = await axios.get(`/placelist`)
+    const allpost = await axios.get(`/user-places`)
     setAllPlaces(allpost.data)
   }
   useEffect(() => {

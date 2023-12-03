@@ -18,6 +18,7 @@ const PlacesFormPage = ({ getAllPost }) => {
   const [checkIn, setCheckIn] = useState(``)
   const [checkOut, setCheckout] = useState(``)
   const [maxGuests, setMaxGuests] = useState(1)
+  const [price, setPrice] = useState(100)
   const [redirect, setRedirect] = useState(``)
 
   useEffect(() => {
@@ -27,13 +28,14 @@ const PlacesFormPage = ({ getAllPost }) => {
       console.log(data.title)
       setTitle(data.title)
       setAddress(data.address)
-      //setAddPhotos(data.addPhotos)
+      setAddPhotos(data.photos)
       setDescription(data.description)
       setPerks(data.perks)
       setExtrainfo(data.extraInfo)
       setCheckIn(data.checkIn)
       setCheckout(data.checkOut)
       setMaxGuests(data.maxGuests)
+      setPrice(data.price)
     })
   }, [id])
 
@@ -60,6 +62,7 @@ const PlacesFormPage = ({ getAllPost }) => {
       checkIn,
       checkOut,
       maxGuests,
+      price,
     }
 
     if (id) await axios.put(`/places`, { id, ...placeData })
@@ -116,6 +119,8 @@ const PlacesFormPage = ({ getAllPost }) => {
           setCheckout={setCheckout}
           maxGuests={maxGuests}
           setMaxGuests={setMaxGuests}
+          price={price}
+          setPrice={setPrice}
         />
         <div>
           <button className='primary my-5 '>Save</button>

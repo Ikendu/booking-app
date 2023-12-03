@@ -1,4 +1,15 @@
-const Checktime = ({ checkIn, setCheckIn, checkOut, setCheckout, maxGuests, setMaxGuests }) => {
+//counters
+
+const Checktime = ({
+  checkIn,
+  setCheckIn,
+  checkOut,
+  setCheckout,
+  maxGuests,
+  setMaxGuests,
+  price,
+  setPrice,
+}) => {
   return (
     <>
       <div className='grid sm:grid-cols-3 gap-3 text-center'>
@@ -25,6 +36,10 @@ const Checktime = ({ checkIn, setCheckIn, checkOut, setCheckout, maxGuests, setM
         <div>
           <h3 className='mt-2 mb-1'>Max number of guest</h3>
           <input type='number' value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} />
+        </div>
+        <div>
+          <h3 className='mt-2 mb-1'>Price per night</h3>
+          <input type='number' value={price} onChange={(e) => setPrice(e.target.value)} />
         </div>
       </div>
     </>
