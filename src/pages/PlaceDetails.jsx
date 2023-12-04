@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { CloseIcon, MapIcon, MoreImageIcon } from '../assets/icons/Logo'
+import BookingWidget from './components/BookingWidget'
 
 const PlaceDetails = () => {
   const { id } = useParams()
@@ -92,32 +93,7 @@ const PlaceDetails = () => {
           Show more photos
         </button>
       </div>
-      <div className='my-6 '>
-        <h2 className=' text-2xl font-semibold my-2'>Description</h2>
-        <p>{place.description}</p>
-      </div>
-      <div className='grid grid-cols-2'>
-        <div>
-          Check-in: {place.checkIn} <br />
-          Check-out: {place.checkOut} <br />
-          Max guest: {place.maxGuests}
-        </div>
-        <div className='bg-white rounded-2xl p-4 shadow shadow-2xl'>
-          <div className='text-2xl text-center font-bold'>Price: ${place.price} / per night</div>
-          <div>
-            <div>
-              <label>Check-in: </label>
-              <input type='date' />
-            </div>
-            <div>
-              <label>Check-out: </label>
-              <input type='date' />
-            </div>
-          </div>
-
-          <button className='primary'>Book this place</button>
-        </div>
-      </div>
+      <BookingWidget place={place} />
     </div>
   )
 }
