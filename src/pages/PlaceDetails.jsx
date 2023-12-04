@@ -1,10 +1,12 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { CloseIcon, MoreImageIcon } from '../assets/icons/Logo'
 
 const PlaceDetails = () => {
   const { id } = useParams()
   const [place, setPlace] = useState([])
+  const [showAll, setShowAll] = useState(false)
 
   const getDetails = async () => {
     const placeDetails = await axios.get(`/place-details/${id}`)
@@ -16,6 +18,33 @@ const PlaceDetails = () => {
   useEffect(() => {
     getDetails()
   }, [])
+
+  if (showAll) {
+    return (
+      <div className='absolute inset-0 bg-black text-white '>
+        <div className=' p-8  bg-black'>
+          All Photos goes here
+          <button
+            onClick={() => setShowAll(false)}
+            className='fixed p-2 bg-slate-700 flex gap-1 rounded-xl shadow shadow-black '
+          >
+            <CloseIcon />
+          </button>
+          <div className='grid gap-4  bg-black'>
+            {place?.photos.length > 0 &&
+              place.photos.map((photo) => (
+                <div key={place._id}>
+                  <img
+                    className=' w-full'
+                    src={import.meta.env.VITE_API_URL + `/uploads/` + photo}
+                  />
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className=' mt-4 bg-gray-100 -mx-8 px-8 py-8'>
@@ -51,7 +80,11 @@ const PlaceDetails = () => {
             </>
           )}
         </div>
-        <button className='absolute bottom-2 right-2 p-2 bg-slate-200 rounded-2xl border '>
+        <button
+          onClick={() => setShowAll(true)}
+          className='absolute bottom-2 right-2 p-2 bg-slate-200 rounded-2xl border flex gap-1 '
+        >
+          <MoreImageIcon />
           Show more photos
         </button>
       </div>

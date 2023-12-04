@@ -263,3 +263,35 @@ export const StarWhiteIcon = () => (
     />
   </svg>
 )
+
+export const MoreImageIcon = () => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    viewBox='0 0 24 24'
+    fill='currentColor'
+    className='w-6 h-6 text-red-500'
+  >
+    <path
+      fillRule='evenodd'
+      d='M3 6a3 3 0 013-3h2.25a3 3 0 013 3v2.25a3 3 0 01-3 3H6a3 3 0 01-3-3V6zm9.75 0a3 3 0 013-3H18a3 3 0 013 3v2.25a3 3 0 01-3 3h-2.25a3 3 0 01-3-3V6zM3 15.75a3 3 0 013-3h2.25a3 3 0 013 3V18a3 3 0 01-3 3H6a3 3 0 01-3-3v-2.25zm9.75 0a3 3 0 013-3H18a3 3 0 013 3V18a3 3 0 01-3 3h-2.25a3 3 0 01-3-3v-2.25z'
+      clipRule='evenodd'
+    />
+  </svg>
+)
+
+export const CloseIcon = () => (
+  <svg
+    xmlns='http://www.w3.org/2000/svg'
+    fill='none'
+    viewBox='0 0 24 24'
+    strokeWidth={1.5}
+    stroke='currentColor'
+    className='w-6 h-6'
+  >
+    <path
+      strokeLinecap='round'
+      strokeLinejoin='round'
+      d='M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+    />
+  </svg>
+)
