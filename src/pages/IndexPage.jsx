@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const IndexPage = () => {
   const [allPlaces, setAllPlaces] = useState([])
@@ -8,14 +9,14 @@ const IndexPage = () => {
     axios.get(`/places`).then((response) => {
       const { data } = response
 
-      setAllPlaces([...data, ...data, ...data, ...data, ...data])
+      setAllPlaces([...data])
     })
   }, [])
 
   return (
     <div className='mt-10 gap-x-6 gap-y-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4'>
       {allPlaces?.map((place) => (
-        <div key={place._id}>
+        <Link to={`/account/details/${place._id}`} key={place._id}>
           <div className=' bg-gray-300 rounded-2xl flex '>
             {place.photos?.[0] && (
               <img
@@ -29,7 +30,7 @@ const IndexPage = () => {
           <div className='mt-1'>
             <span className='font-bold'>N{place.price}</span> per night
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   )

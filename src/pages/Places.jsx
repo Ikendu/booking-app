@@ -36,9 +36,9 @@ const Places = () => {
               key={place._id}
               className='flex gap-4 p-4 rounded-2xl bg-gray-100 mt-5 cursor-pointer'
             >
-              <div className='flex w-32 h-32 bg-gray-300 shrink-0 '>
+              <div className='flex w-32 h-32 bg-gray-300 shrink-0 rounded-xl '>
                 <img
-                  className=' object-cover'
+                  className=' object-cover rounded-xl'
                   src={`http://localhost:4000/uploads/` + place?.photos[0]}
                   alt='Place Image'
                 />
