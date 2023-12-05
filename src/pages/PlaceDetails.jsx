@@ -24,8 +24,8 @@ const PlaceDetails = () => {
     return (
       <div className='absolute inset-0 bg-black text-white '>
         <div className=' p-8  bg-black'>
-          <h2 className='text-center'>
-            Photos of <span className=' font-bold text-xl text-slate-300'> {place.title}</span>
+          <h2 className='text-center mb-10 text-2xl'>
+            Photos of <span className=' font-bold text-3xl text-slate-300'> {place.title}</span>
           </h2>
           <button
             onClick={() => setShowAll(false)}

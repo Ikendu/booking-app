@@ -1,4 +1,9 @@
+import { useState } from 'react'
+
 const BookingWidget = ({ place }) => {
+  const [checkIn, setCheckIn] = useState(``)
+  const [checkOut, setCheckOut] = useState(``)
+  const [maxGuests, setMaxGuests] = useState(1)
   return (
     <div>
       <div className='my-6 grid grid-col-1 md:grid-cols-2'>
@@ -17,23 +22,35 @@ const BookingWidget = ({ place }) => {
             <div className='flex'>
               <div className='p-3'>
                 <label>Check-in: </label>
-                <input type='date' className=' border-2 rounded-md' />
+                <input
+                  type='date'
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
+                  className=' border-2 rounded-md'
+                />
               </div>
               <div className=' p-3 border-l '>
                 <label>Check-out: </label>
-                <input type='date' className='border-2 rounded-md' />
+                <input
+                  type='date'
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
+                  className='border-2 rounded-md'
+                />
               </div>
             </div>
 
             <div className='border-t p-3'>
               <label>Max Number of Guest:</label>
-              <input type='number' value={1} />
+              <input
+                type='number'
+                value={maxGuests}
+                onChange={(e) => setMaxGuests(e.target.value)}
+              />
             </div>
           </div>
 
-          <button className=' mt-4 bg-red-800 w-full p-5 rounded-2xl text-white font-bold '>
-            Book this place
-          </button>
+          <button className=' mt-4 primary '>Book this place</button>
         </div>
       </div>
       <div className='bg-white -mx-4 p-6 border-t'>
