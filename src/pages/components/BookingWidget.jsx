@@ -1,9 +1,15 @@
 import { useState } from 'react'
+import { differenceInCalendarDays } from 'date-fns'
 
 const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState(``)
   const [checkOut, setCheckOut] = useState(``)
   const [maxGuests, setMaxGuests] = useState(1)
+
+  let numberOfDays = 0
+  if (checkIn && checkOut) {
+    numberOfDays = differenceInCalendarDays(new Date(checkOut), new Date(checkIn))
+  }
   return (
     <div>
       <div className='my-6 grid grid-col-1 md:grid-cols-2'>
@@ -50,7 +56,9 @@ const BookingWidget = ({ place }) => {
             </div>
           </div>
 
-          <button className=' mt-4 primary '>Book this place</button>
+          <button className=' mt-4 primary '>
+            Book this place {numberOfDays > 0 && <span> N{numberOfDays * place.price}</span>}
+          </button>
         </div>
       </div>
       <div className='bg-white -mx-4 p-6 border-t'>
