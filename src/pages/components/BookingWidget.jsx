@@ -5,6 +5,8 @@ const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState(``)
   const [checkOut, setCheckOut] = useState(``)
   const [maxGuests, setMaxGuests] = useState(1)
+  const [name, setName] = useState(``)
+  const [phone, setPhone] = useState(``)
 
   let numberOfDays = 0
   if (checkIn && checkOut) {
@@ -47,13 +49,22 @@ const BookingWidget = ({ place }) => {
             </div>
 
             <div className='border-t p-3'>
-              <label>Max Number of Guest:</label>
+              <label>Number of Guest:</label>
               <input
                 type='number'
                 value={maxGuests}
                 onChange={(e) => setMaxGuests(e.target.value)}
               />
             </div>
+
+            {numberOfDays > 0 && (
+              <div className='border-t p-3'>
+                <label>Your Full Name:</label>
+                <input type='text' value={name} onChange={(e) => setName(e.target.value)} />
+                <label>Phone Number:</label>
+                <input type='tel' value={phone} onChange={(e) => setPhone(e.target.value)} />
+              </div>
+            )}
           </div>
 
           <button className=' mt-4 primary '>
