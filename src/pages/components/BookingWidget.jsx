@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { differenceInCalendarDays } from 'date-fns'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState(``)
@@ -13,21 +14,25 @@ const BookingWidget = ({ place }) => {
   if (checkIn && checkOut) {
     numberOfDays = differenceInCalendarDays(new Date(checkOut), new Date(checkIn))
   }
+  const amount = numberOfDays * place.price
 
   const bookThisPlace = async (e) => {
     e.preventDefault()
 
-    const data = new FormData()
-    data.set(`checkIn`, checkIn)
-    data.set(`checkOut`, checkOut)
-    data.set(`maxGuest`, maxGuests)
-    data.set(`name`, name)
-    data.set(`phone`, phone)
-    data.set(`price`, place.price)
+    const clientOrder = {
+      place: place._id,
+      checkIn,
+      checkOut,
+      maxGuests,
+      name,
+      phone,
+      price: place.price,
+      amount,
+    }
 
-    const sendData = await axios.post(`booking`)
-    if (sendData) alert(`booking successfull`)
-    else alert(`Booking failed`)
+    const sendData = await axios.post(`booking`, clientOrder)
+    if (sendData) toast.success(`booking successfull`)
+    else toast.error(`Booking failed`)
   }
   return (
     <div>
@@ -85,7 +90,7 @@ const BookingWidget = ({ place }) => {
           </div>
 
           <button onClick={bookThisPlace} className=' mt-4 primary '>
-            Book this place {numberOfDays > 0 && <span> N{numberOfDays * place.price}</span>}
+            Book this place {numberOfDays > 0 && <span> N{amount}</span>}
           </button>
         </div>
       </div>
