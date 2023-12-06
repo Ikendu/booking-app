@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { differenceInCalendarDays } from 'date-fns'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import { Navigate } from 'react-router-dom'
 
 const BookingWidget = ({ place }) => {
   const [checkIn, setCheckIn] = useState(``)
@@ -9,6 +10,7 @@ const BookingWidget = ({ place }) => {
   const [maxGuests, setMaxGuests] = useState(1)
   const [name, setName] = useState(``)
   const [phone, setPhone] = useState(``)
+  const [redirect, setRedirect] = useState(``)
 
   let numberOfDays = 0
   if (checkIn && checkOut) {
@@ -30,10 +32,19 @@ const BookingWidget = ({ place }) => {
       amount,
     }
 
-    const sendData = await axios.post(`booking`, clientOrder)
-    if (sendData) toast.success(`booking successfull`)
-    else toast.error(`Booking failed`)
+    const { data } = await axios.post(`booking`, clientOrder)
+
+    if (data) {
+      toast.success(`booking successfull`)
+      const placeId = data._id
+      setRedirect(`/account/bookings/${placeId}`)
+    } else toast.error(`Booking failed`)
   }
+
+  if (redirect) {
+    return <Navigate to={redirect} />
+  }
+
   return (
     <div>
       <div className='my-6 grid grid-col-1 md:grid-cols-2'>
