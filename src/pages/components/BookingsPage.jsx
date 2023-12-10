@@ -13,6 +13,7 @@ const BookingsPage = () => {
   useEffect(() => {
     getMyBookings()
   }, [])
+
   return (
     <div>
       <AccountNav />
