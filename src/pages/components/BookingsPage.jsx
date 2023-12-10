@@ -17,8 +17,8 @@ const BookingsPage = () => {
     <div>
       <AccountNav />
       <div>
-        {bookings.map((books) => (
-          <div key={books._id}>{books.name}</div>
+        {bookings.map((booked) => (
+          <div key={booked._id}>{booked.name}</div>
         ))}
       </div>
     </div>

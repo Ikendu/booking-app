@@ -22,7 +22,7 @@ const BookingWidget = ({ place }) => {
     e.preventDefault()
 
     const clientOrder = {
-      place: place._id,
+      placeId: place._id,
       checkIn,
       checkOut,
       maxGuests,
@@ -36,8 +36,8 @@ const BookingWidget = ({ place }) => {
 
     if (data) {
       toast.success(`booking successfull`)
-      const placeId = data._id
-      setRedirect(`/account/bookings/${placeId}`)
+      const userId = data._id
+      setRedirect(`/account/booked/${userId}`)
     } else toast.error(`Booking failed`)
   }
 

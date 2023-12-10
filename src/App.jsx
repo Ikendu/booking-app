@@ -10,7 +10,7 @@ import ProfilePage from './pages/ProfilePage'
 import Places from './pages/Places'
 import PlacesFormPage from './pages/components/PlacesFormPage'
 import PlaceDetails from './pages/PlaceDetails'
-import Booking from './pages/components/Booking'
+import Booked from './pages/components/Booked'
 import BookingsPage from './pages/components/BookingsPage'
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL
@@ -32,7 +32,7 @@ function App() {
             <Route path='/account/places/:id' element={<PlacesFormPage />} />
             <Route path='/account/details/:id' element={<PlaceDetails />} />
             <Route path='/account/bookings' element={<BookingsPage />} />
-            <Route path='/account/bookings/:id' element={<Booking />} />
+            <Route path='/account/booked/:id' element={<Booked />} />
           </Route>
         </Routes>
       </UserContexProvider>
