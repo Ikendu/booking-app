@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import AccountNav from './AccountNav'
 import axios from 'axios'
+import { format } from 'date-fns'
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([])
@@ -29,11 +30,24 @@ const BookingsPage = () => {
                   src={`${import.meta.env.VITE_API_URL}/uploads/${booked.placeId.photos?.[0]}`}
                 />
               </div>
-              <div>
-                <p>{booked.placeId.title}</p>
+              <div className='mt-3'>
+                <p className='text-xl font-semibold'>{booked.placeId.title}</p>
                 <p>
-                  from {booked.checkIn} to {booked.checkOut}
+                  from{' '}
+                  <span className='font-semibold'>
+                    {format(new Date(booked.checkIn), `dd-MM-yyyy`)}
+                  </span>
+                  {` `}to{` `}
+                  <span className='font-semibold'>
+                    {format(new Date(booked.checkOut), `dd-MM-yyyy`)}
+                  </span>
                 </p>
+                <div>
+                  Number of Guest: {booked.maxGuests} <br />
+                  Number of Nights: {booked.days}
+                  <br />
+                  Total amount: {booked.amount}
+                </div>
               </div>
             </div>
           ))}
