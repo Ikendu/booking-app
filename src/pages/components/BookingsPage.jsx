@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import AccountNav from './AccountNav'
 import axios from 'axios'
 import { format } from 'date-fns'
-import { CalenderIcon, ThumbUpIcon } from '../../assets/icons/Logo'
+import { CalenderIcon, CardIcon, ThumbUpIcon, UsersIcon } from '../../assets/icons/Logo'
+import { Link } from 'react-router-dom'
 
 const BookingsPage = () => {
   const [bookings, setBookings] = useState([])
@@ -22,7 +23,8 @@ const BookingsPage = () => {
       <div>
         {bookings?.length > 0 &&
           bookings.map((booked) => (
-            <div
+            <Link
+              to={`/account/booked/${booked._id}`}
               key={booked._id}
               className='flex gap-4 bg-gray-200 mt-10 rounded-2xl overflow-hidden '
             >
@@ -32,11 +34,11 @@ const BookingsPage = () => {
                 />
               </div>
               <div className='mt-3'>
-                <div className='text-xl font-semibold py-3 grow pr-3 flex gap-2'>
+                <div className='text-xl font-semibold py-2 grow pr-3 flex gap-2'>
                   <ThumbUpIcon />
                   {booked.placeId.title}
                 </div>
-                <div className='flex gap-3'>
+                <div className='flex gap-3 text-gray-500'>
                   <CalenderIcon />
                   {booked.days} nights from{' '}
                   <span className='font-semibold'>
@@ -47,11 +49,13 @@ const BookingsPage = () => {
                     {format(new Date(booked.checkOut), `dd-MM-yyyy`)}
                   </span>
                 </div>
-                <div>
-                  Number of Guest: {booked.maxGuests} | Total amount: N{booked.amount}
+                <div className='flex gap-3'>
+                  <UsersIcon />
+                  Number of Guest: {booked.maxGuests} | <CardIcon /> Total amount:{' '}
+                  <span className='font-bold'>N{booked.amount}</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
       </div>
     </div>
